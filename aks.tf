@@ -23,14 +23,17 @@ resource "azurerm_kubernetes_cluster" "aks" {
     type = "SystemAssigned"
   }
 }
+
 resource "null_resource" "kubeconfig" {
   provisioner "local-exec" {
     command = <<EOT
-      curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+      curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+      export PATH=$HOME/bin:$PATH
       az aks get-credentials --resource-group AKS --name myAKSCluster --overwrite-existing
     EOT
   }
 }
+
 
 
 
