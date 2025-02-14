@@ -33,13 +33,7 @@ resource "null_resource" "kubeconfig" {
 }
 
 
-# Get AKS credentials
-resource "null_resource" "kubeconfig" {
-  provisioner "local-exec" {
-    command = "az aks get-credentials --resource-group ${azurerm_resource_group.rg.name} --name ${azurerm_kubernetes_cluster.aks.name} --overwrite-existing"
-  }
-  depends_on = [azurerm_kubernetes_cluster.aks]
-}
+
 
 # Deploy Kubernetes resources
 resource "null_resource" "deploy_app" {
